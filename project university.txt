@@ -1,0 +1,29 @@
+Q.1- Find the Total Number of Students in Each Department?
+Ans- select s.student_id,s.first_name,s.last_name,s.dept_id,d.dept_name,count(*) as num_of_student from student_table as s inner join departments as d on s.dept_id=d.dep_id group by s.dept_id;
+
+Q.2- List All Courses Taught by a Specific Professor ?
+Ans- select p.firstname,p.lastname,c.course_name,count(*) as list_course from courses as c inner join professor as p on c.professor_id=p.pro_id group by c.course_name;
+
+Q.3-Find the Average Grade of Students in Each Course ?
+Ans- select c.course_name,s.first_name,s.lasT_name,avg(e.grade) as Avg_grade from enrollments as e inner join student_table as s on e.student_id=s.student_id inner join courses as c on c.course_id=e.course_id group by c.course_name;
+
+Q.4- List All Students Who Have Not Enrolled in Any Courses ?
+Ans - select s.first_name,s.last_name,e.enroll_id from student_table as s inner join enrollments as e on e.student_id=s.student_id where e.course_id is null;
+
+Q.5-Find the Number of Courses Offered by Each Department 
+Ans- select d.dept_name,c.course_name,count(*) as total_course from departments as d inner join courses as c on c.dept_id=d.dep_id group by c.course_name;
+
+Q.6-List All Students Who Have Taken a Specific Course (e.g., 'DA') ?
+Ans- select s.first_name,s.last_name,s.phone,c.course_name from student_table as s inner join courses as c on c.dept_id=s.dept_id where c.course_name='DA';
+
+Q.7- Find the Most Popular Course Based on Enrollment Numbers ?
+Ans-select c.course_name,e.enroll_id,count(*) as popular_course from courses as c inner join enrollments as e on e.course_id=c.course_id group by c.course_id limit 1;
+
+Q.8- Find the Average Number of Credits Per Student in a Department ?
+Ans- select s.first_name,s.last_name,d.dept_name,avg(c.credit) as Avg_credit from courses as c inner join student_table as s on s.dept_id=c.dept_id inner join departments as d on d.dep_id=c.dept_id group by s.dept_id;
+
+Q.9-  List All Professors Who Teach in More Than One Department 
+Ans- select p.pro_id,p.firstname,p.lastname,d.dept_name,c.course_name,count(*) as most_popular_professor from professor as p inner join courses as c on c.professor_id=p.pro_id inner join departments as d on c.dept_id=d.dep_id group by c.dept_id;
+
+Q.10- Get the Highest and Lowest Grade in a Specific Course (e.g., 'Operating Systems') 
+Ans- select c.course_name,max(e.grade) as max_grade,min(e.grade) as min_grade from courses as c inner join enrollments as e on c.course_id=e.course_id where c.course_name='DA';
